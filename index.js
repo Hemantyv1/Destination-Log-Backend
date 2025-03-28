@@ -14,24 +14,21 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Connect to MongoDB with error handling
 connectDB().catch(err => {
-    console.error("❌ MongoDB Connection Failed:", err.message);
-    process.exit(1); // Exit if DB connection fails
+    console.error("MongoDB Connection Failed:", err.message);
+    process.exit(1); 
 });
 
 app.get('/', (req, res) => {
     res.send("Itinerary Generator API is running...");
 });
 
-// Load Routes
 const infoRoutes = require('./models/routes/infoRoutes');
 app.use('/info', infoRoutes);
 
-console.log("✅ Routes loaded: /info/create and /info/all");
+console.log(" Routes loaded: /info/create and /info/all");
 
-// Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
